@@ -5,23 +5,24 @@ import { createVolume, createCell } from "../src/functions/create.js";
 const newCell = createCell(0, 0, 0);
 const newCellTwo = createCell(1, 1, 1)
 
-const smallVolume = createVolume(2, 2, 2);
-const smallChild = createCell(2, 2, 2);
-const smallChildTwo = createCell(2, 2, 2);
-const smallParent = createCell(1, 1, 1);
+const smallVolume = createVolume(10, 10, 10);
+const smallChild = createCell(1, 1, 1);
+const smallChildTwo = createCell(0, 0, 0);
 
 //console.log(smallChild);
 smallVolume.addChild(smallChild);
-// console.log(smallChild);
-// console.log(smallVolume);
-smallVolume.removeChild(smallChild);
-// console.log(smallChild);
-// console.log(smallVolume);
-smallVolume.addParent(smallChildTwo);
-smallVolume.removeParent(smallChildTwo);
-console.log(smallVolume);
+smallVolume.addChild(smallChildTwo);
 console.log(smallChild);
-console.log(smallChildTwo);
+//console.table(smallVolume.layers);
+console.table(smallVolume.layers[1].cellArray);
+// smallVolume.addParent(smallChildTwo);
+
+// console.log('\n');
+// console.log(smallVolume);
+// console.log('\n');
+// console.log(smallChild);
+// console.log('\n');
+// console.log(smallChildTwo);
 
 
 //console.log(smallChild);

@@ -8,7 +8,9 @@ import {
 
 export class Cell {
     constructor(heightIndex, widthIndex, depthIndex) {
-        this.identity = uuidv4().toString();
+        this.identity = uuidv4().toString(); 
+        // var layer = getCellIdentityByCoords(2, 2, 2);
+        // 
         this.type = "Cell";
 
         this.parents = [];
@@ -68,5 +70,6 @@ export class Cell {
             removeObjectFromArray(object, object.children);
         };
         
+        //this.print();
     };
 };

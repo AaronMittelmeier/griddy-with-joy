@@ -9,6 +9,7 @@ export function createVolume(height, width, layers) {
         var depth = layer;
         let newLayer = new Layer(height, width, depth);
         newVolume.addLayer(newLayer);
+        //console.table(newVolume);
     };
 
     return newVolume;
@@ -16,5 +17,6 @@ export function createVolume(height, width, layers) {
 
 export function createCell(height, width, depth) {
     let newCell = new Cell(height, width, depth)
+    //console.table(newCell);
     return newCell;
 };

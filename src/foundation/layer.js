@@ -61,6 +61,8 @@ export class Layer {
             removeObjectFromArray(object, this.parents);
             removeObjectFromArray(object, object.children);
         };
+
+       // this.print();
     }
 }
 
