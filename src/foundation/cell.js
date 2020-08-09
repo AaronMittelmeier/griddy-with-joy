@@ -1,6 +1,8 @@
 import {
-    removeObjectFromArray
-} from '../../util/spliceObjectArray.js';
+    removeObjectFromObjectArray
+} from '../functions/objectArray.js';
+
+import { addUniversalFunctionsToClass } from '../functions/foundation.js'
 
 import {
     v4 as uuidv4
@@ -8,6 +10,8 @@ import {
 
 export class Cell {
     constructor(heightIndex, widthIndex, depthIndex) {
+        addUniversalFunctionsToClass(this);
+
         this.identity = uuidv4().toString(); 
         // var layer = getCellIdentityByCoords(2, 2, 2);
         // 
@@ -36,39 +40,39 @@ export class Cell {
             console.table(this);
         };
 
-        this.addChild = function (object) {
-            this.children.push({
-                identity: object.identity,
-                type: object.type
-            });
+        // this.addChild = function (object) {
+        //     this.children.push({
+        //         identity: object.identity,
+        //         type: object.type
+        //     });
 
-            object.parents.push({
-                identity: this.identity,
-                type: this.type
-            });
-        };
+        //     object.parents.push({
+        //         identity: this.identity,
+        //         type: this.type
+        //     });
+        // };
 
-        this.addParent = function (object) {
-            this.parents.push({
-                identity: object.identity,
-                type: object.type
-            });
+        // this.addParent = function (object) {
+        //     this.parents.push({
+        //         identity: object.identity,
+        //         type: object.type
+        //     });
 
-            object.children.push({
-                identity: this.identity,
-                type: this.type
-            });
-        };
+        //     object.children.push({
+        //         identity: this.identity,
+        //         type: this.type
+        //     });
+        // };
 
-        this.removeChild = function (object) {
-            removeObjectFromArray(object, this.children);
-            removeObjectFromArray(object, object.parents);
-        };
+        // this.removeChild = function (object) {
+        //     removeObjectFromArray(object, this.children);
+        //     removeObjectFromArray(object, object.parents);
+        // };
 
-        this.removeParent = function (object) {
-            removeObjectFromArray(object, this.parents);
-            removeObjectFromArray(object, object.children);
-        };
+        // this.removeParent = function (object) {
+        //     removeObjectFromArray(object, this.parents);
+        //     removeObjectFromArray(object, object.children);
+        // };
         
         //this.print();
     };

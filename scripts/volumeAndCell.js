@@ -1,20 +1,23 @@
 import { createVolume, createCell } from "../src/functions/create.js";
-
-
+import { printVolumeLayers } from "../scripts/terminal.js"
 
 const newCell = createCell(0, 0, 0);
 const newCellTwo = createCell(1, 1, 1)
 
-const smallVolume = createVolume(10, 10, 10);
+const smallVolume = createVolume(5, 5, 5);
 const smallChild = createCell(1, 1, 1);
-const smallChildTwo = createCell(0, 0, 0);
+const smallChildTwo = createCell(1, 1, 0);
 
 //console.log(smallChild);
 smallVolume.addChild(smallChild);
 smallVolume.addChild(smallChildTwo);
-console.log(smallChild);
+
+
+printVolumeLayers(smallVolume);
+
+
+//console.log(smallChild);
 //console.table(smallVolume.layers);
-console.table(smallVolume.layers[1].cellArray);
 // smallVolume.addParent(smallChildTwo);
 
 // console.log('\n');

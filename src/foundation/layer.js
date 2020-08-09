@@ -28,39 +28,39 @@ export class Layer {
             console.table(this.cellArray);
         };
 
-        this.addChild = function (object) {
-            this.children.push({
-                identity: object.identity,
-                type: object.type
-            });
+        // this.addChild = function (object) {
+        //     this.children.push({
+        //         identity: object.identity,
+        //         type: object.type
+        //     });
 
-            object.parents.push({
-                identity: this.identity,
-                type: this.type
-            });
-        };
+        //     object.parents.push({
+        //         identity: this.identity,
+        //         type: this.type
+        //     });
+        // };
 
-        this.addParent = function (object) {
-            this.parents.push({
-                identity: object.identity,
-                type: object.type
-            });
+        // this.addParent = function (object) {
+        //     this.parents.push({
+        //         identity: object.identity,
+        //         type: object.type
+        //     });
 
-            object.children.push({
-                identity: this.identity,
-                type: this.type
-            });
-        };
+        //     object.children.push({
+        //         identity: this.identity,
+        //         type: this.type
+        //     });
+        // };
         
-        this.removeChild = function (object) {
-            removeObjectFromArray(object, this.children);
-            removeObjectFromArray(object, object.parents);
-        };
+        // this.removeChild = function (object) {
+        //     removeObjectFromArray(object, this.children);
+        //     removeObjectFromArray(object, object.parents);
+        // };
 
-        this.removeParent = function (object) {
-            removeObjectFromArray(object, this.parents);
-            removeObjectFromArray(object, object.children);
-        };
+        // this.removeParent = function (object) {
+        //     removeObjectFromArray(object, this.parents);
+        //     removeObjectFromArray(object, object.children);
+        // };
 
        // this.print();
     }
