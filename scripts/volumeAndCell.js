@@ -7,19 +7,29 @@ const newCellTwo = createCell(1, 1, 1)
 
 const smallVolume = createVolume(2, 2, 2);
 const smallChild = createCell(2, 2, 2);
+const smallChildTwo = createCell(2, 2, 2);
 const smallParent = createCell(1, 1, 1);
 
-//console.log(newCell);
-
-// console.log(smallChild);
+//console.log(smallChild);
 smallVolume.addChild(smallChild);
+// console.log(smallChild);
+// console.log(smallVolume);
+smallVolume.removeChild(smallChild);
+// console.log(smallChild);
+// console.log(smallVolume);
+smallVolume.addParent(smallChildTwo);
+smallVolume.removeParent(smallChildTwo);
+console.log(smallVolume);
+console.log(smallChild);
+console.log(smallChildTwo);
+
 
 //console.log(smallChild);
 
-smallVolume.removeChild(smallChild);
+//smallVolume.removeChild(smallChild);
 
 //console.log(smallVolume);
-console.log(smallChild);
+//console.log(smallChild);
 
 
 

@@ -1,12 +1,6 @@
 import {
     v4 as uuidv4
 } from "uuid";
-
-import {
-    addParentToChildObject,
-    addChildToParentObject
-} from '../functions/heritage.js'
-
 export class Layer {
     constructor(height, width, depth) {
         this.identity = uuidv4().toString();
@@ -34,25 +28,39 @@ export class Layer {
             console.table(this.cellArray);
         };
 
-        this.addChild = function (childObject) {
-            addChildToParentObject(this.children, childObject.identity, childObject.type);
-            addParentToChildObject(childObject.parents, this.identity, this.type);
+        this.addChild = function (object) {
+            this.children.push({
+                identity: object.identity,
+                type: object.type
+            });
+
+            object.parents.push({
+                identity: this.identity,
+                type: this.type
+            });
         };
 
-        this.addParent = function (parentObject) {
-            addParentToChildObject(this.parents, parentObject.identity, parentObject.type);
-            addChildToParentObject(parentObject.children, this.identity, this.type);
+        this.addParent = function (object) {
+            this.parents.push({
+                identity: object.identity,
+                type: object.type
+            });
+
+            object.children.push({
+                identity: this.identity,
+                type: this.type
+            });
+        };
+        
+        this.removeChild = function (object) {
+            removeObjectFromArray(object, this.children);
+            removeObjectFromArray(object, object.parents);
         };
 
-        this.removeChild = function (childObject) {
-            removeObjectFromArray(childObject, this.children);
-            removeObjectFromArray(childObject.parents, this.children);
+        this.removeParent = function (object) {
+            removeObjectFromArray(object, this.parents);
+            removeObjectFromArray(object, object.children);
         };
-
-        this.removeParent = function (parentObject) {
-            removeObjectFromArray(parentObject, this.parents);
-            removeObjectFromArray(parentObject.parents, this.parents);
-        }
     }
 }
 

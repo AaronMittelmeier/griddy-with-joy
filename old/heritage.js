@@ -3,16 +3,16 @@
 // I may also want to move other functions here or figure out a way to make
 //      every function in this list part of every builder
 
-import { removeObjectFromArray } from '../../util/spliceObjectArray.js';
+import { removeObjectFromArray } from '../util/spliceObjectArray.js';
 
-export function addChildToParentObject (childObject, childIdentity, childType) {
+export function addChild(childObject, childIdentity, childType) {
     childObject.push({
         childIdentity: childIdentity,
         childType: childType
     });
 };
 
-export function addParentToChildObject(parentObject, parentIdentity, parentType) {
+export function addParent(parentObject, parentIdentity, parentType) {
     parentObject.push({
         parentIdentity: parentIdentity,
         parentType: parentType
