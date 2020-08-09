@@ -5,24 +5,24 @@
 
 import { removeObjectFromArray } from '../../util/spliceObjectArray.js';
 
-export function addChildToParentObject (parentObject, childIdentity, childType) {
-    parentObject.children.push({
+export function addChildToParentObject (childObject, childIdentity, childType) {
+    childObject.push({
         childIdentity: childIdentity,
         childType: childType
     });
 };
 
-export function addParentToChildObject(childObject, parentIdentity, parentType) {
-    childObject.parents.push({
+export function addParentToChildObject(parentObject, parentIdentity, parentType) {
+    parentObject.push({
         parentIdentity: parentIdentity,
         parentType: parentType
     });
 };
 
 export function removeChildFromParentObject(childObject, parentObject) {
-    removeObjectFromArray(childObject, parentObject.children);
+    removeObjectFromArray(childObject, parentObject);
 };
 
 export function removeParentFromChildObject(parentObject, childObject) {
-    removeObjectFromArray(parentObject, childObject.parents);
+    removeObjectFromArray(parentObject, childObject);
 };

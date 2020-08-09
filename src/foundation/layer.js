@@ -34,23 +34,25 @@ export class Layer {
             console.table(this.cellArray);
         };
 
-        this.addChild = function (object) {
-            this.children.push({
-                childIdentity: object.identity,
-                childType: object.type
-            });
-
-            addParentToChildObject(object, this.identity, this.type);
+        this.addChild = function (childObject) {
+            addChildToParentObject(this.children, childObject.identity, childObject.type);
+            addParentToChildObject(childObject.parents, this.identity, this.type);
         };
 
-        this.addParent = function (object) {
-            this.parents.push({
-                parentIdentity: object.identity,
-                parentType: object.type
-            });
-
-            addChildToParentObject(object, this.identity, this.type);
+        this.addParent = function (parentObject) {
+            addParentToChildObject(this.parents, parentObject.identity, parentObject.type);
+            addChildToParentObject(parentObject.children, this.identity, this.type);
         };
+
+        this.removeChild = function (childObject) {
+            removeObjectFromArray(childObject, this.children);
+            removeObjectFromArray(childObject.parents, this.children);
+        };
+
+        this.removeParent = function (parentObject) {
+            removeObjectFromArray(parentObject, this.parents);
+            removeObjectFromArray(parentObject.parents, this.parents);
+        }
     }
 }
 

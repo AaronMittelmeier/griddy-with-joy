@@ -1,4 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
+import {
+    removeObjectFromArray
+} from '../../util/spliceObjectArray.js';
+
 
 import {
     addParentToChildObject,
@@ -36,27 +40,25 @@ export class Volume {
         };
 
         this.addChild = function (childObject) {
-            this.children.push({
-                childIdentity: childObject.identity,
-                childType: childObject.type
-            });
-
-            addParentToChildObject(childObject, this.identity, this.type);
+            addChildToParentObject(this.children, childObject.identity, childObject.type);
+            addParentToChildObject(childObject.parents, this.identity, this.type);
         };
 
         this.addParent = function (parentObject) {
-            this.parents.push({
-                parentIdentity: parentObject.identity,
-                parentType: parentObject.type
-            });
-
-            addChildToParentObject(parentObject, this.identity, this.type);
+            addParentToChildObject(this.parents, parentObject.identity, parentObject.type);
+            addChildToParentObject(parentObject.children, this.identity, this.type);
         };
 
         this.removeChild = function (childObject) {
             removeObjectFromArray(childObject, this.children);
-            // need to remove the 
+           // removeObjectFromArray(childObject.parents, this.children);
+        };
+
+        this.removeParent = function (parentObject) {
+            removeObjectFromArray(parentObject, this.parents);
+          //  removeObjectFromArray(parentObject.parents, this.parents);
         }
+
 
 
     }
