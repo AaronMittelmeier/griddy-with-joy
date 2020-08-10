@@ -9,7 +9,7 @@ import {
 } from "../scripts/terminal.js"
 
 
-const worldAlpha = createWorld(1024, 1024, 8);
+const worldAlpha = createWorld(1024, 1024, 1024);
 
 const cellZero = createCell(0, 0, 0) // coordinates 
 const cellOne = createCell(1, 1, 1);

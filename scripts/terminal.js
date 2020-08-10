@@ -14,3 +14,15 @@ export function printLayers (volumeToPrint) {
         console.log('Object type must be Volume or World. Is: ' + object.type);
     }
 }
+
+export function cellsDone (volumeToPrint) {
+    if (volumeToPrint.type == 'Volume') {
+console.log("Done - Cell Count: " + volumeToPrint.length)
+    } else if (volumeToPrint.type == 'World') {
+        for (var strata in volumeToPrint.strata) {
+            console.table(volumeToPrint.strata[strata].cellFramework);
+        }
+    } else {
+        console.log('Object type must be Volume or World. Is: ' + object.type);
+    }
+}
