@@ -1,19 +1,36 @@
-import { createVolume, createCell } from "../src/functions/create.js";
-import { printVolumeLayers } from "../scripts/terminal.js"
+import { 
+    createVolume, 
+    createCell, 
+    createWorld
+} from "../src/functions/create.js";
 
-const newCell = createCell(0, 0, 0);
-const newCellTwo = createCell(1, 1, 1)
+import {
+    printLayers
+} from "../scripts/terminal.js"
 
-const smallVolume = createVolume(5, 5, 5);
-const smallChild = createCell(1, 1, 1);
-const smallChildTwo = createCell(1, 1, 0);
 
+const worldAlpha = createWorld(1024, 1024, 8);
+
+const cellZero = createCell(0, 0, 0) // coordinates 
+const cellOne = createCell(1, 1, 1);
+
+const volumeA = createVolume(2, 2, 2);
+const volumeB = createVolume(4, 4, 4);
+
+
+
+// console.log(worldAlpha);
+// console.log(cellZero);
+// console.log(volumeA);
+
+//printLayers(worldAlpha);
+
+//console.log(smallVolume);
 //console.log(smallChild);
-smallVolume.addChild(smallChild);
-smallVolume.addChild(smallChildTwo);
 
 
-printVolumeLayers(smallVolume);
+//printLayers(smallVolume);
+
 
 
 //console.log(smallChild);

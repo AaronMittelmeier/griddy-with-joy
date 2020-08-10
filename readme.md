@@ -30,3 +30,23 @@ TimeLine:
         Added ./util:
                 ./spliceObjectArray.js
                     allows us to remove entire objects from an objectArray (which we do a lot)
+
+    1.2.0 ~ 
+        Split ./src into further groupings as it gets more complex
+        - cell: smallest unit of space in game
+        - container: a place to hold other objects in cell
+
+        foundation:
+        - volume / layer: building blocks of abstract 'groups' of cells 
+
+        functions:
+        - create: builds the actual objects / constructors
+
+        world:
+        - making world and volume the same object, while neat, was proving hard
+        - i needed boundaries to drop the volumes into
+        - more over, now i can build extremely large arrays with world, since i'm not filling them with any actual data
+        - strata is a 'layer' object, very similar, that doesnt store as much data as the layer
+ 
+        scripts:
+        - terminal: just helps with console logging

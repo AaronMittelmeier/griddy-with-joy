@@ -1,12 +1,16 @@
 // just a set of functions to help with basic output
 // and our test scripts
 
-export function printVolumeLayers (object) {
-    if (object.type == 'Volume') {
-        for (var layer in object.layers) {
-            console.table(object.layers[layer].cellArray);
+export function printLayers (volumeToPrint) {
+    if (volumeToPrint.type == 'Volume') {
+        for (var layer in volumeToPrint.layers) {
+            console.table(volumeToPrint.layers[layer].cellArray);
+        }
+    } else if (volumeToPrint.type == 'World') {
+        for (var strata in volumeToPrint.strata) {
+            console.table(volumeToPrint.strata[strata].cellFramework);
         }
     } else {
-        console.log("Object type must be Volume. Is: " + object.type)
+        console.log('Object type must be Volume or World. Is: ' + object.type);
     }
 }
