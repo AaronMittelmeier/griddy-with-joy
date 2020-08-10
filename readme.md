@@ -31,7 +31,7 @@ TimeLine:
                 ./spliceObjectArray.js
                     allows us to remove entire objects from an objectArray (which we do a lot)
 
-    1.2.0 ~ 
+    1.2.0 ~ 08/09/2020
         Split ./src into further groupings as it gets more complex
         - cell: smallest unit of space in game
         - container: a place to hold other objects in cell
