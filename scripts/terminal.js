@@ -17,11 +17,9 @@ export function printLayers (volumeToPrint) {
 
 export function cellsDone (volumeToPrint) {
     if (volumeToPrint.type == 'Volume') {
-console.log("Done - Cell Count: " + volumeToPrint.length)
+        console.log("Done - Cell Count: " + volumeToPrint.layers.height * volumeToPrint.layers.width * volumeToPrint.layers.depth);
     } else if (volumeToPrint.type == 'World') {
-        for (var strata in volumeToPrint.strata) {
-            console.table(volumeToPrint.strata[strata].cellFramework);
-        }
+        console.log("Done - Cell Count: " + volumeToPrint.strata.height * volumeToPrint.strata.width * volumeToPrint.strata.depth);
     } else {
         console.log('Object type must be Volume or World. Is: ' + object.type);
     }

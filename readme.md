@@ -50,3 +50,11 @@ TimeLine:
  
         scripts:
         - terminal: just helps with console logging
+
+    1.3.0 ~ 08/14/2020
+        - installed the following
+            cucumber - for testing later
+            gatsby - for creating static content web-page groups (damien-ui)
+            react & react-dom - for helping with webDev
+            websocket(ws) - adding websocket
+            

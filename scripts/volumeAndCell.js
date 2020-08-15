@@ -5,11 +5,12 @@ import {
 } from "../src/functions/create.js";
 
 import {
-    printLayers
+    printLayers,
+    cellsDone
 } from "../scripts/terminal.js"
 
 
-const worldAlpha = createWorld(1024, 1024, 1024);
+const worldAlpha = createWorld(20, 20, 20);
 
 const cellZero = createCell(0, 0, 0) // coordinates 
 const cellOne = createCell(1, 1, 1);
@@ -17,13 +18,13 @@ const cellOne = createCell(1, 1, 1);
 const volumeA = createVolume(2, 2, 2);
 const volumeB = createVolume(4, 4, 4);
 
+//cellsDone(worldAlpha);
 
-
-// console.log(worldAlpha);
+//console.log(worldAlpha);
 // console.log(cellZero);
 // console.log(volumeA);
 
-//printLayers(worldAlpha);
+printLayers(worldAlpha);
 
 //console.log(smallVolume);
 //console.log(smallChild);
