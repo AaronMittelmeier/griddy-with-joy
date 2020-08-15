@@ -1,62 +1,59 @@
 import WebSocket from 'ws';
+import {
+  sleep,
+  msgFormatter
+} from './socketFunc.js'
 
 // setup a 'const' wrapper for the whole shpiel so we can run it standalone
-// as a function call: runServer(port
+// as a function call: runServer(port)
 const runServer = async (port) => {
-  const wsserver = new WebSocket.Server({ port: port });
-  var serverMessage = 'Server';
+  var serverMessage = 'ServerMessage';
 
+  const wsserver = new WebSocket.Server({
+    port: port
+  });
+  
   wsserver.on('connection', (client) => {
-    console.log('Client has connected\n');
-    //console.log(client);
-    console.log(wsserver);
-
-    serverMessage = srvMsg(serverMessage);
+    serverMessage = msgFormatter(serverMessage);
+    console.log('Client Connected\n');
 
     client.send(serverMessage);
-    console.log(`\n     Sending Message : ===> ${serverMessage}`); 
+    console.log(`\n     Sending Message : ===> ${serverMessage}`);
 
     client.on('message', (clientMessage) => {
       console.log(`\n===> Received message:      ${clientMessage}`);
-      console.log(`\n     Sending Message : ===> ${serverMessage}`); 
+      console.log(`\n     Sending Message : ===> ${serverMessage}`);
 
-      if(clientMessage == "timeout") {
+      if (clientMessage == "timeout") {
         serverMessage = "disconnect";
         console.log('Setting Timeout of 5000 ms..');
 
-        sleep(5000).then(() => { 
+        sleep(5000).then(() => {
           client.send(serverMessage);
-          console.log(`\n     Sending Message : ===> ${serverMessage}`); 
+          console.log(`\n     Sending Message : ===> ${serverMessage}`);
           wsserver.close();
         });
-      
+
       } else {
         serverMessage = 'Server';
         serverMessage = srvMsg(serverMessage);
         client.send(serverMessage);
-        console.log(`\n     Sending Message : ===> ${serverMessage}`); 
+        console.log(`\n     Sending Message : ===> ${serverMessage}`);
       };
+
     });
 
     wsserver.on('close', () => {
       console.log('Connection Closed');
-    }); 
+    });
 
     wsserver.on('error', () => {
       client.send('error');
-    }); 
+    });
   });
 };
 
-function srvMsg(serverMessage) {
-  var datetime = new Date();
-  var serverMessage =  `${datetime} :: ${serverMessage}` ;
-  return serverMessage
-};
 
-const sleep = (milliseconds) => {
-  return new Promise(resolve => setTimeout(resolve, milliseconds))
-};
 
 runServer(8088);
 

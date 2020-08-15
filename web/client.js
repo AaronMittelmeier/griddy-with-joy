@@ -1,5 +1,5 @@
 import WebSocket from 'ws';
-
+import { msgFormatter, sleep } from './socketFunc.js';
 
 const runClient = async (url) => {
   const wsclient = new WebSocket(url);
@@ -11,7 +11,7 @@ const runClient = async (url) => {
     //console.log(wsclient);
 
     clientMessage = "Client";
-    clientMessage = newMsg(clientMessage);
+    clientMessage = msgFormatter(clientMessage);
 
     this.send(clientMessage);
     console.log(`\nSending Message: => ${clientMessage}\n`);
@@ -19,15 +19,11 @@ const runClient = async (url) => {
     wsclient.onmessage = function (serverMessage) {
       console.log(`\n => Received Message: ${serverMessage.data}\n`);
 
-      if (falseBit == true) {
-        clientMessage = "timeout";
-        this.send(clientMessage);
-        console.log(`\nSending Message: => ${clientMessage}\n`);
-      } else if (falseBit == false) {
-        clientMessage = "Client";
-        clientMessage = newMsg(clientMessage);
-        this.send(clientMessage);
-        console.log(`\nSending Message: => ${clientMessage}\n`);
+
+      clientMessage = "Client";
+      clientMessage = msgFormatter(clientMessage);
+      this.send(clientMessage);
+      console.log(`\nSending Message: => ${clientMessage}\n`);
       };
     };
 
@@ -42,14 +38,7 @@ const runClient = async (url) => {
     wsclient.onerror = function (error) {
       console.log(`ERROR: ${error.message}\n`);
     };
-
-  };
 };
 
-function newMsg(clientMessage) {
-  var datetime = new Date();
-  var clientMessage = `${datetime} :: ${clientMessage}` ;
-  return clientMessage;
-};
 
 runClient("ws://localhost:8088");
