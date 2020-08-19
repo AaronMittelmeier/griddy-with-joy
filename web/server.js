@@ -6,26 +6,29 @@ import {
 
 // setup a 'const' wrapper for the whole shpiel so we can run it standalone
 // as a function call: runServer(port)
+var msgCounter = 0;
+
 const runServer = async (port) => {
-  var serverMessage = 'ServerMessage';
+  const wsserver = new WebSocket.Server({port: port});
+  var serverMessage = msgFormatter('ServerMessage');
 
-  const wsserver = new WebSocket.Server({
-    port: port
-  });
-  
   wsserver.on('connection', (client) => {
-    serverMessage = msgFormatter(serverMessage);
     console.log('Client Connected\n');
-
-    client.send(serverMessage);
-    console.log(`\n     Sending Message : ===> ${serverMessage}`);
 
     client.on('message', (clientMessage) => {
       console.log(`\n===> Received message:      ${clientMessage}`);
+      client.send(msgFormatter(serverMessage + ' - count: ' + msgCounter));
       console.log(`\n     Sending Message : ===> ${serverMessage}`);
 
-      if (clientMessage == "timeout") {
-        serverMessage = "disconnect";
+      msgCounter++;
+      
+      if (msgCounter == 100) {
+        client.send('disconnect');
+        sleep(2000)
+      };
+
+      if (clientMessage == 'timeout') {
+        serverMessage = 'disconnect';
         console.log('Setting Timeout of 5000 ms..');
 
         sleep(5000).then(() => {
@@ -36,7 +39,7 @@ const runServer = async (port) => {
 
       } else {
         serverMessage = 'Server';
-        serverMessage = srvMsg(serverMessage);
+        serverMessage = msgFormatter(serverMessage);
         client.send(serverMessage);
         console.log(`\n     Sending Message : ===> ${serverMessage}`);
       };

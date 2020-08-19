@@ -7,24 +7,45 @@ import {
 import {
     printLayers,
     cellsDone
-} from "../scripts/terminal.js"
+} from "../src/functions/terminal.js"
 
 
-const worldAlpha = createWorld(20, 20, 20);
+const worldAlpha = createWorld(5,5,5);
 
-const cellZero = createCell(0, 0, 0) // coordinates 
+const cellZero = createCell(0, 0, 0); // coordinates 
 const cellOne = createCell(1, 1, 1);
 
 const volumeA = createVolume(2, 2, 2);
-const volumeB = createVolume(4, 4, 4);
+const volumeB = createVolume(3, 3, 3);
 
-//cellsDone(worldAlpha);
 
-//console.log(worldAlpha);
-// console.log(cellZero);
+worldAlpha.integrateCell(cellZero);
+worldAlpha.disintegrateCell(cellZero);
+
+worldAlpha.integrateVolume(volumeA);
+worldAlpha.disintegrateVolume(volumeA)
+
+
+
+console.log(cellZero);
+console.log(volumeA);
+console.log(worldAlpha);
+
+// console.log(cellOne);
+// console.log('\n');
+
 // console.log(volumeA);
+// console.log('\n');
 
-printLayers(worldAlpha);
+// console.log(worldAlpha.cells);
+// console.log('\n');
+
+//worldAlpha.integrateCell(cellOne);
+//worldAlpha.integrateCell(cellOne);
+////worldAlpha.integrateVolume(volumeA);
+// cellZero.addToWorld(worldAlpha);
+// printLayers(volumeA);
+// printLayers(worldAlpha);
 
 //console.log(smallVolume);
 //console.log(smallChild);

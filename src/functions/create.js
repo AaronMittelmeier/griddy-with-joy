@@ -8,11 +8,24 @@ import {
     World
 } from '../world/world.js';
 
-export function createVolume(height, width, depth) {
+export function createEmptyVolume(height, width, layers) {
     let newVolume = new Volume();
 
-    for (var layer = 0; layer < depth; layer++) {
-        let newLayer = new Layer(height, width, depth);
+    for (var layer = 0; layer < layers; layer++) {
+        let newLayer = new Layer(height, width, layer);
+        newVolume.addLayer(newLayer);
+        //console.table(newVolume);
+    };
+
+    return newVolume;
+};
+
+
+export function createFullVolume(height, width, layers) {
+    let newVolume = new Volume();
+
+    for (var layer = 0; layer < layers; layer++) {
+        let newLayer = new Layer(height, width, layer);
         newVolume.addLayer(newLayer);
         //console.table(newVolume);
     };
@@ -26,11 +39,11 @@ export function createCell(height, width, depth) {
     return newCell;
 };
 
-export function createWorld(height, width, depth) {
-    let newWorld = new World(height, width, depth)
+export function createWorld(height, width, stratas) {
+    let newWorld = new World(height, width, stratas)
 
-    for (var strata = 0; strata < depth; strata++) {
-        let newStrata = new Strata(height, width, depth);
+    for (var strata = 0; strata < stratas; strata++) {
+        let newStrata = new Strata(height, width, strata);
         newWorld.addStrata(newStrata);
         //console.table(newVolume);
     };

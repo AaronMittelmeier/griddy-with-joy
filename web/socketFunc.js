@@ -1,5 +1,5 @@
 export function msgFormatter(message) {
-    var datetime = new Date("YYYY-MM-DD_hh:mm:ss");
+    var datetime = new Date().toISOString().replace(/T/, '_').replace(/\..+/, '') 
     message = `${datetime} :: ${message}` ;
     return message
   };
