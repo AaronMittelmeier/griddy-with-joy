@@ -14,7 +14,25 @@ export class Volume {
         this.volumes = [];
         this.siblings = [];
         this.cells = [];
+
+        this.modifications = []; // things that change me
+        this.modifiers = []; // things that i change
+
         this.type = 'Volume';
+
+        this.addModifications = function (modification) {
+            this.modifications.push({
+                identity: modification.identity,
+                objectTypesToModify: []
+            })
+        };
+
+        this.addModfiers = function (modifier) {
+            this.modifiers.push({
+                identity: modifier.identity,
+                objectTypesToModify: []
+            })
+        }
 
         this.addCell = function (cell, isOrigin) {
             if(typeof isOrigin == 'undefined') {isOrigin = false};

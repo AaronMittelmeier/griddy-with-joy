@@ -4,7 +4,7 @@
 export function printLayers (volumeToPrint) {
     if (volumeToPrint.type == 'Volume') {
         for (var layer in volumeToPrint.layers) {
-            console.table(volumeToPrint.layers[layer].cellArray);
+            console.table(volumeToPrint.layers[layer].cellFramework);
         }
     } else if (volumeToPrint.type == 'World') {
         for (var strata in volumeToPrint.strata) {

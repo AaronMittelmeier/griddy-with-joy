@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { createTwoDimensionalArray } from '../../util/arrays'
+import { createTwoDimensionalArray } from '../../util/arrays.js'
 //import { addUniversalFunctionsToClass } from '../functions/foundation.js';
 
 export class Layer {
@@ -14,14 +14,19 @@ export class Layer {
         this.width = width;
         this.depth = depth;
 
-        this.cellArray = createTwoDimensionalArray(this.height, this.width, this.depth);
+        this.cellFramework = createTwoDimensionalArray(this.height, this.width, this.depth);
 
         this.addCell = function (cell) {
-            this.cells.push({
-                identity: cell.identity,
-                type: cell.type,
-                coordinates: cell.coordinates
-            });
+
+            if (cell.coordinates.depth == layer.depth) {
+                this.cells.push({
+                    identity: cell.identity,
+                    type: cell.type,
+                    coordinates: cell.coordinates
+                })
+            } else {
+                console.log("cannot append cell to layer")
+            }
         };
 
         this.removeCell = function (cell) {

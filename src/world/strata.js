@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { createTwoDimensionalArray } from '../../util/arrays.js'
 //import { addUniversalFunctionsToClass } from '../functions/foundation.js';
 
 export class Strata {
@@ -11,7 +12,7 @@ export class Strata {
         this.width = width;
         this.depth = depth;
 
-        this.cellFramework = createStrata(this.height, this.width, this.depth);
+        this.cellFramework = createTwoDimensionalArray(this.height, this.width, this.depth);
 
         this.addCellReference = function (cell) {
             this.cells.push({
@@ -37,17 +38,4 @@ export class Strata {
         
         //addUniversalFunctionsToClass(this);
     }
-};
-
-function createStrata(height, width, depth) {
-    var cellArray = [];
-
-    for (var row = 0; row < height; row++) {
-        cellArray[row] = [];
-        for (var column = 0; column < width; column++) {
-            cellArray[row][column] = '';
-        }
-    };
-
-    return cellArray;
 };

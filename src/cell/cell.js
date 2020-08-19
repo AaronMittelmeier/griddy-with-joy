@@ -14,6 +14,17 @@ export class Cell {
         this.siblings = [];
         this.faces = [];
 
+        this.properties = []
+
+        this.addProperty = function (property, canBeModified) {
+            if(typeof canBeModified == 'undefined') {canBeModified = true};
+
+            this.properties.push({
+                identity: property.identity,
+                canBeModified: canBeModified
+            })
+        }
+
         // relative to the world it is in - it can only belong to one world
         this.coordinates = {
             height: {
@@ -26,18 +37,22 @@ export class Cell {
             },
             depth: {
                 index: depthIndex,
-                layer: depthIndex + 1
+                strata: depthIndex + 1
             }
         };
 
-        this.addToVolume = function (volume) {
+        this.addToVolume = function (volume, isOrigin) {
+            if(typeof isOrigin == 'undefined') {isOrigin = false};
+
             this.volumes.push({
                 identity: volume.identity,
+                isOrigin: isOrigin,
                 relativeCoordinates: []
             });
 
             volume.cells.push({
                 identity: this.identity,
+                isOrigin: isOrigin,
                 type: this.type,
                 coordinates: this.coordinates
             });
@@ -49,20 +64,20 @@ export class Cell {
         };
 
         this.addToWorld = function (world) {
-            this.world.push({
-                identity: world.identity,
-                relativeCoordinates: []
+            this.world = ({
+                identity: world.identity
             });
 
             world.cells.push({
                 identity: this.identity,
+                coordinates: this.coordinates,
                 type: this.type
             });
         };
 
         this.removeFromWorld = function (world) {
-            removeObjectFromObjectArray(world, this.world);
             removeObjectFromObjectArray(this, world.cells);
+            this.world = {};
         };
 
 
@@ -70,20 +85,22 @@ export class Cell {
             // object type must be a 'container' for a cell, it can't be a volume
             this.containers.push({
                 identity: container.identity,
-                type: container.type
+                type: container.type,
+                contents: container.contents
             });
             // if (object.type == 'Cell') {
             //     this.layers[object.coordinates.depth.index].cellArray[object.coordinates.height.index][object.coordinates.width.index] = object.identity;
             // };
             container.cell = {
                 identity: this.identity,
-                type: this.type
+                type: this.type,
+                coordinates: this.coordinates
             };
         };
 
         this.removeContainer = function (container) {
             removeObjectFromArray(container, this.containers);
-            removeObjectFromArray(container, container.cell);
+            container.cell = {};
         };
 
         this.print = function () {

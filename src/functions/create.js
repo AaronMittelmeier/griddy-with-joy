@@ -20,21 +20,28 @@ export function createEmptyVolume(height, width, layers) {
     return newVolume;
 };
 
+export function createThreeDimensionalCube(size) {
+    var height = size;
+    var width = size;
+    var stratas = size;
 
-export function createFullVolume(height, width, layers) {
     let newVolume = new Volume();
 
-    for (var layer = 0; layer < layers; layer++) {
-        let newLayer = new Layer(height, width, layer);
-        newVolume.addLayer(newLayer);
-        //console.table(newVolume);
+    for (var strata = 0; strata < stratas; strata++) {
+//        var twoDimensionalArray = [];
+        for (var row = 0; row < height; row++) {
+  //          twoDimensionalArray[row] = [];
+            for (var column = 0; column < width; column++) {
+                newVolume.addCell(createCell(row, column, strata));
+            }
+        };
     };
 
     return newVolume;
 };
 
-export function createCell(height, width, depth) {
-    let newCell = new Cell(height, width, depth)
+export function createCell(row, column, strata) {
+    let newCell = new Cell(row, column, strata)
     //console.table(newCell);
     return newCell;
 };

@@ -1,7 +1,8 @@
 import { 
-    createVolume, 
+    createEmptyVolume, 
     createCell, 
-    createWorld
+    createWorld,
+    createThreeDimensionalCube
 } from "../src/functions/create.js";
 
 import {
@@ -11,25 +12,30 @@ import {
 
 
 const worldAlpha = createWorld(5,5,5);
-
-const cellZero = createCell(0, 0, 0); // coordinates 
-const cellOne = createCell(1, 1, 1);
-
-const volumeA = createVolume(2, 2, 2);
-const volumeB = createVolume(3, 3, 3);
-
-
-worldAlpha.integrateCell(cellZero);
-worldAlpha.disintegrateCell(cellZero);
-
-worldAlpha.integrateVolume(volumeA);
-worldAlpha.disintegrateVolume(volumeA)
+worldAlpha.integrateVolume(createThreeDimensionalCube(2));
+//console.log(worldAlpha);
+printLayers(worldAlpha);
 
 
 
-console.log(cellZero);
-console.log(volumeA);
-console.log(worldAlpha);
+
+// volumeA.addCell(cellZero);
+// volumeB.addCell(cellOne);
+// worldAlpha.integrateVolume(volumeA);
+// worldAlpha.integrateVolume(volumeB);
+// console.log(worldAlpha);
+// console.log('\n');
+// worldAlpha.disintegrateVolume(volumeA);
+// console.log(worldAlpha);
+
+// worldAlpha.integrateVolume(volumeA);
+// worldAlpha.disintegrateVolume(volumeA)
+
+
+
+// console.log(cellZero);
+// console.log(volumeA);
+// console.log(worldAlpha);
 
 // console.log(cellOne);
 // console.log('\n');
