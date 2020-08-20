@@ -1,0 +1,38 @@
+{
+  "name": "griddy-with-joy",
+  "version": "1.3.0",
+  "description": "Grids and Array - Learning",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "vc": "node ./scripts/volumeAndCell.js",
+    "wsclient": "node ./web/client.js",
+    "wsserver": "node ./web/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AaronMittelmeier/griddy-with-joy.git"
+  },
+  "keywords": [
+    "grid",
+    "array",
+    "tutorial",
+    "javascript",
+    "learn"
+  ],
+  "author": "Aaron M.",
+  "license": "Private. You cannot use without permission.",
+  "bugs": {
+    "url": "https://github.com/AaronMittelmeier/griddy-with-joy/issues"
+  },
+  "homepage": "https://github.com/AaronMittelmeier/griddy-with-joy#readme",
+  "dependencies": {
+    "cucumber": "^6.0.5",
+    "faker": "^4.1.0",
+    "gatsby": "^2.24.47",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "uuid": "^8.3.0",
+    "ws": "^7.3.1"
+  }
+}
