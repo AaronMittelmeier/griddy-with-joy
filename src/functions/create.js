@@ -49,11 +49,10 @@ export function createCell(row, column, strata) {
 
 export function createWorld(height, width, stratas) {
     let newWorld = new World(height, width, stratas)
-
     for (var strata = 0; strata < stratas; strata++) {
         let newStrata = new Strata(height, width, strata);
         newWorld.addStrata(newStrata);
-        
+
         for (var row = 0; row < height; row++) {
             for (var column = 0; column < width; column++) {
                 let newCell = new Cell(row, column, strata);
