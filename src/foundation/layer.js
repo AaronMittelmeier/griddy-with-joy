@@ -14,10 +14,16 @@ export class Layer {
         this.width = width;
         this.depth = depth;
 
-        this.cellFramework = createTwoDimensionalArray(this.height, this.width, this.depth);
+        this.cellFramework = () => {
+            var cellArray = createTwoDimensionalArray(this.height, this.width, this.depth);
+            // cellArray.forEach((cell) => {
+            //     cell.length
+            // })
+            // trying to set up the cell framework to automatically find the IDs of cells that are in this position.
+        }
+            
 
         this.addCell = function (cell) {
-
             if (cell.coordinates.depth == layer.depth) {
                 this.cells.push({
                     identity: cell.identity,

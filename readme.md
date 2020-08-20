@@ -57,4 +57,40 @@ TimeLine:
             gatsby - for creating static content web-page groups (damien-ui)
             react & react-dom - for helping with webDev
             websocket(ws) - adding websocket
+    
+    1.4.0 ~ 08/19/2020
+        - started transitioning from cell array to objects and object groups
+        - cell.js
+            -- added properties (what properties are effected or can be effected)
+            -- added effectedBy (current effects on this cell)
+                --- will need to have a way to identify if the current effects apply / link
+                     to the current cell properties
+            -- added effectsOthers (the types of objects and type of effect it has on them)
+            -- added containers
+            -- added world -/ forced to single world
+            -- need to add 
+        - container.js
+            -- an object that introduces items in the world 
+            -- trees, rocks, shit like that
+            -- containers can be 'literal' like treasure chests or figurative in a way to add
+                other content
+        - world.js
+            -- seperated into a different object type (originally was the same as volume)
+            -- strata (the old version of layers) is literally the z axis / depth
+            -- added integrateCell / Volume functions
+                --- cell plants an ID into the strata index layer
+                --- integrate volume loops through each of the cells within it
+        - strata.js
+            -- the new world layer
+            -- an empty 2D index of all the possible positions that can be filled by cells in each 
+                layer of the world
+        - arrays.js
+            -- moved the inter-function / inter-method create array functions into a utilities folder
+        - promises.js
+            -- added timer / sleep / wait function
+        - create.js
+            -- begin world building
+            -- fixed world to create 'cell objects' and integrate those into strata
+            -- right now new volumes overwrite the cells that are there, but need to pull the id from world, not vice versa
             
+

@@ -1,6 +1,7 @@
 import { Layer } from '../foundation/layer.js';
 import { Volume } from '../foundation/volume.js';
 import { Cell } from '../cell/cell.js';
+
 import {
     Strata
 } from '../world/strata.js';
@@ -52,7 +53,13 @@ export function createWorld(height, width, stratas) {
     for (var strata = 0; strata < stratas; strata++) {
         let newStrata = new Strata(height, width, strata);
         newWorld.addStrata(newStrata);
-        //console.table(newVolume);
+        
+        for (var row = 0; row < height; row++) {
+            for (var column = 0; column < width; column++) {
+                let newCell = new Cell(row, column, strata);
+                newWorld.integrateCell(newCell);
+            };
+        };
     };
 
     return newWorld;

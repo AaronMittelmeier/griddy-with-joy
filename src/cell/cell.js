@@ -14,16 +14,9 @@ export class Cell {
         this.siblings = [];
         this.faces = [];
 
-        this.properties = []
-
-        this.addProperty = function (property, canBeModified) {
-            if(typeof canBeModified == 'undefined') {canBeModified = true};
-
-            this.properties.push({
-                identity: property.identity,
-                canBeModified: canBeModified
-            })
-        }
+        this.properties = [];
+        this.affectedBy = [];
+        this.affectsOthers = [];
 
         // relative to the world it is in - it can only belong to one world
         this.coordinates = {
@@ -40,6 +33,42 @@ export class Cell {
                 strata: depthIndex + 1
             }
         };
+
+        this.addAffectedBy = function (affect) {
+            this.affectedBy.push({
+                identity: affect.identity,
+                type: affect.type,
+                propertiesAffected: affect.propertiesAffected
+            });
+
+            // var propAffectedArray = affect.propertiesAffected
+            // propAffectedArray.forEach((property) => {
+            //     if (this.properties.includes(property, 0)) {
+            //         this.properties.push({
+            //             i
+            //         });
+            //     }
+            // })
+
+        };
+
+        this.addAffectsOthers = function (affect) {
+            this.affectsOthers.push({
+                identity: affect.identity,
+                type: affect.type,
+                propertiesAffected: affect.propertiesAffected
+            });
+        };
+
+        this.addProperty = function (property, canBeAffected) {
+            if(typeof canBeAffected == 'undefined') {canBeAffected = true};
+
+            this.properties.push({
+                identity: property.identity,
+                canBeAffected: canBeAffected
+            })
+        }
+
 
         this.addToVolume = function (volume, isOrigin) {
             if(typeof isOrigin == 'undefined') {isOrigin = false};

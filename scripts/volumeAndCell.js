@@ -11,9 +11,12 @@ import {
 } from "../src/functions/terminal.js"
 
 
-const worldAlpha = createWorld(5,5,5);
+const worldAlpha = createWorld(5,5,5)
+printLayers(worldAlpha);
+
+console.log('\n\n')
+
 worldAlpha.integrateVolume(createThreeDimensionalCube(2));
-//console.log(worldAlpha);
 printLayers(worldAlpha);
 
 
