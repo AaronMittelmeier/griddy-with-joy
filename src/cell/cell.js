@@ -142,6 +142,38 @@ export class Cell {
 
             return idObject;
         };
-        //addUniversalFunctionsToClass(this);
+
+        this.faces = {
+            above: {
+                material: '',
+                identity: '',
+                coordintates: []
+            },
+            below: {
+                material: '',
+                identity: '',
+                coordintates: []
+            },
+            north: {
+                material: '',
+                identity: '',
+                coordintates: []
+            },
+            south: {
+                material: '',
+                identity: '',
+                coordintates: []
+            },
+            east: {
+                material: '',
+                identity: '',
+                coordintates: []
+            },
+            west: {
+                material: '',
+                identity: '',
+                coordintates: []
+            },
+        };
     };
 };

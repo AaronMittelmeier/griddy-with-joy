@@ -25,9 +25,7 @@ export class World {
             });
         };
 
-        this.integrateCell = function (cell, volumeIdentity) {
-            if(typeof volumeIdentity == 'undefined') {volumeIdentity = ''};
-
+        this.integrateCell = function (cell) {
             this.cells.push({
                 identity: cell.identity,
                 volumes: cell.volumes,
@@ -59,7 +57,7 @@ export class World {
             }); 
 
             cellArray.forEach((cell) => {
-                this.integrateCell(cell, volume.identity);
+                this.integrateCell(cell);
             });
 
             volume.world = {

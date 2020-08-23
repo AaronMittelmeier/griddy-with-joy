@@ -42,6 +42,7 @@ export class Volume {
             
             this.cells.push({
                 identity: cell.identity,
+                volumes: cell.volumes,
                 volumeOrigin: isOrigin,
                 type: cell.type,
                 coordinates: cell.coordinates,

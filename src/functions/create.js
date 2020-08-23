@@ -56,18 +56,19 @@ export function createThreeDimensionalCubeWrapper(world, size) {
     var stratas = size;
 
     let newVolume = new Volume();
+    var cellObjectArray = [];
 
     for (var strata = 0; strata < stratas; strata++) {
         newVolume.addLayer(height, width, strata);
 
         for (var row = 0; row < height; row++) {
             for (var column = 0; column < width; column++) {
-                var newCell = getCellByCoordinatesIndex(row, column, strata, world)
-                newVolume.addCell(newCell);
+                addObjectToObjectArray(getCellByCoordinatesIndex(row, column, strata, world), cellObjectArray);
             };
         };
     };
 
+    cellObjectArray.forEach((cell) => newVolume.addCell(cell));
     return newVolume;
 };
 

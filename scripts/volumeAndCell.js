@@ -10,32 +10,53 @@ import {
     printLayers,
     cellsDone
 } from "../src/functions/terminal.js"
+import { getCellByCoordinatesAxes, getCellByCoordinatesIndex } from "../src/functions/locator.js";
 
 
 const newCell = createCell(3,3,3)
 const worldAlpha = createWorld(4,4,4)
-// printLayers(worldAlpha);
+const newCube = createThreeDimensionalCube(2);
 
-// console.log('\n\n')
+console.log('The world before new cube: ');
+printLayers(worldAlpha);
+console.log('\n\n');
 
-// const newCube = createThreeDimensionalCube(2);
-// console.log(newCube);
+console.log('New Cube - complete object: ');
+console.log(newCube);
+console.log('\n\n');
+
+// const newCubeWrapper = createThreeDimensionalCubeWrapper(worldAlpha, 2);
+// console.log('New Cube as a Wrapper of existing cells (in the world): ');
+// console.log(newCubeWrapper);
+// console.log('\n\n');
+
+console.log('Integrate (overwrite) new cube volume into the world');
+worldAlpha.integrateVolume(newCube);
+printLayers(worldAlpha);
+console.log('\n\n');
 
 const newCubeWrapper = createThreeDimensionalCubeWrapper(worldAlpha, 2);
+console.log('New Cube as a Wrapper of existing cells (in the world): ');
 console.log(newCubeWrapper);
+console.log('\n\n');
 
-// console.log(worldAlpha.cells)
-// printLayers(worldAlpha);
-// console.log('\n\n')
-// worldAlpha.integrateVolume(newCube);
-// printLayers(worldAlpha);
-// console.log('\n\n')
+console.log('Creating a volume as a \' wrapper \' to show an index of cells that will have its properties');
+console.log('Should be exactly the same as new cube');
 worldAlpha.integrateVolume(newCubeWrapper);
-console.log(newCubeWrapper);
-worldAlpha.integrateCell(newCell);
-console.log(newCell);
 printLayers(worldAlpha);
+console.log('\n\n');
 
+console.log('Get the origin cell by coordinates');
+console.log(getCellByCoordinatesIndex(0,0,0, worldAlpha));
+console.log('\n\n');
+
+console.log('New Cube After integration: ');
+console.log(newCube);
+console.log('\n\n');
+
+console.log('New Cube wrapper after integration: ');
+console.log(newCubeWrapper);
+console.log('\n\n');
 
 
 

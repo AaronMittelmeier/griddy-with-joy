@@ -8,13 +8,15 @@ export function getCellByCoordinatesIndex (heightIndex, widthIndex, depthIndex, 
         if (cell.coordinates.height.index == heightIndex) {
             if (cell.coordinates.width.index == widthIndex) {
                 if (cell.coordinates.depth.index == depthIndex) {
+                    // console.log('Coordinates function cell: ')
+                    // console.log(cell);
+                   // console.log('\n');
                     returnCell = cell;
                 }
             }
         }
     })
-    // console.log('Cell Cords: ');
-    // console.table(returnCell);
+
     return returnCell;
 };
 
