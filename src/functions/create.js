@@ -5,17 +5,24 @@ import { Cell } from '../cell/cell.js';
 import {
     Strata
 } from '../world/strata.js';
+
+import {
+    addObjectToObjectArray 
+} from '../../util/arrays.js'
+
 import {
     World
 } from '../world/world.js';
+
+import {
+    getCellByCoordinatesIndex
+} from '../functions/locator.js'
 
 export function createEmptyVolume(height, width, layers) {
     let newVolume = new Volume();
 
     for (var layer = 0; layer < layers; layer++) {
-        let newLayer = new Layer(height, width, layer);
-        newVolume.addLayer(newLayer);
-        //console.table(newVolume);
+        newVolume.addLayer(height, width, layer);
     };
 
     return newVolume;
@@ -27,14 +34,37 @@ export function createThreeDimensionalCube(size) {
     var stratas = size;
 
     let newVolume = new Volume();
+    var cellObjectArray = [];
 
     for (var strata = 0; strata < stratas; strata++) {
-//        var twoDimensionalArray = [];
+        newVolume.addLayer(height, width, strata);
+
         for (var row = 0; row < height; row++) {
-  //          twoDimensionalArray[row] = [];
             for (var column = 0; column < width; column++) {
-                newVolume.addCell(createCell(row, column, strata));
-            }
+                addObjectToObjectArray(createCell(row, column, strata), cellObjectArray);
+            };
+        };
+    };
+
+    cellObjectArray.forEach((cell) => newVolume.addCell(cell));
+    return newVolume;
+};
+
+export function createThreeDimensionalCubeWrapper(world, size) {
+    var height = size;
+    var width = size;
+    var stratas = size;
+
+    let newVolume = new Volume();
+
+    for (var strata = 0; strata < stratas; strata++) {
+        newVolume.addLayer(height, width, strata);
+
+        for (var row = 0; row < height; row++) {
+            for (var column = 0; column < width; column++) {
+                var newCell = getCellByCoordinatesIndex(row, column, strata, world)
+                newVolume.addCell(newCell);
+            };
         };
     };
 
@@ -43,7 +73,6 @@ export function createThreeDimensionalCube(size) {
 
 export function createCell(row, column, strata) {
     let newCell = new Cell(row, column, strata)
-    //console.table(newCell);
     return newCell;
 };
 

@@ -40,23 +40,13 @@ export class Cell {
                 type: affect.type,
                 propertiesAffected: affect.propertiesAffected
             });
-
-            // var propAffectedArray = affect.propertiesAffected
-            // propAffectedArray.forEach((property) => {
-            //     if (this.properties.includes(property, 0)) {
-            //         this.properties.push({
-            //             i
-            //         });
-            //     }
-            // })
-
         };
 
-        this.addAffectsOthers = function (affect) {
+        this.addAffectsOthers = function (affector) {
             this.affectsOthers.push({
-                identity: affect.identity,
-                type: affect.type,
-                propertiesAffected: affect.propertiesAffected
+                identity: affector.identity,
+                type: affector.type,
+                propertiesAffected: affector.propertiesAffected
             });
         };
 
@@ -85,6 +75,11 @@ export class Cell {
                 type: this.type,
                 coordinates: this.coordinates
             });
+
+            this.world = ({
+                identity: volume.world.identity,
+                name: volume.world.name
+            });
         };
 
         this.removeFromVolume = function (volume) {
@@ -94,7 +89,8 @@ export class Cell {
 
         this.addToWorld = function (world) {
             this.world = ({
-                identity: world.identity
+                identity: world.identity,
+                name: world.name
             });
 
             world.cells.push({
@@ -138,6 +134,14 @@ export class Cell {
             console.table(this);
         };
 
+        this.getIdentity = function () {
+            const idObject = {
+                identity: this.identity,
+                type: this.type
+            };
+
+            return idObject;
+        };
         //addUniversalFunctionsToClass(this);
     };
 };

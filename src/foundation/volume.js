@@ -1,9 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { removeObjectFromObjectArray } from '../../util/arrays.js'
-// import {
-//     addUniversalFunctionsToClass
-// } from '../functions/foundation.js'
+import  { 
+    removeObjectFromObjectArray, 
+    createTwoDimensionalArray 
+        } from '../../util/arrays.js'
 
 export class Volume {
     constructor() {
@@ -14,40 +14,48 @@ export class Volume {
         this.volumes = [];
         this.siblings = [];
         this.cells = [];
-
-        this.modifications = []; // things that change me
-        this.modifiers = []; // things that i change
+        
+        this.properties = [];
+        this.affectedBy = []; // things that change me
+        this.affectsOthers = []; // things that i change
 
         this.type = 'Volume';
 
-        this.addModifications = function (modification) {
-            this.modifications.push({
-                identity: modification.identity,
-                objectTypesToModify: []
-            })
+        this.addAffectedBy = function (affect) {
+            this.affectedBy.push({
+                identity: affect.identity,
+                type: affect.type,
+                propertiesAffected: affect.propertiesAffected
+            });
         };
 
-        this.addModfiers = function (modifier) {
-            this.modifiers.push({
-                identity: modifier.identity,
-                objectTypesToModify: []
-            })
-        }
+        this.addAffectsOthers = function (affector) {
+            this.affectsOthers.push({
+                identity: affector.identity,
+                type: affector.type,
+                propertiesAffected: affector.propertiesAffected
+            });
+        };
 
         this.addCell = function (cell, isOrigin) {
-            if(typeof isOrigin == 'undefined') {isOrigin = false};
-
+            isOrigin = originEvaluator(this.cells, isOrigin);
+            
             this.cells.push({
                 identity: cell.identity,
                 volumeOrigin: isOrigin,
                 type: cell.type,
-                coordinates: cell.coordinates
+                coordinates: cell.coordinates,
+                world: this.world
             });
+
+            this.layers[cell.coordinates.depth.index].cellFramework[cell.coordinates.height.index][cell.coordinates.width.index] = cell.identity;
 
             cell.volumes.push({
                 identity: this.identity,
-                volumeOrigin: isOrigin,
+                world: this.world,
                 type: this.type,
+                isOrigin: isOrigin,
+                relativeCoordinates: []
             });
         };
 
@@ -86,18 +94,18 @@ export class Volume {
         };
 
         this.removeFromWorld = function (world) {
-            removeObjectFromObjectArray(world, this.worlds);
             removeObjectFromObjectArray(this, world.volumes);
+            this.world = {};
         };
         
-        this.addLayer = function (layer) {
+        this.addLayer = function (height, width, depth) {
             this.layers.push({
                 layer: this.layers.length,
-                height: layer.height,
-                width: layer.width,
-                depth: layer.depth,
-                identity: layer.identity,
-                cellArray: layer.cellArray
+                height: height,
+                width: width,
+                depth: depth,
+                identity: uuidv4().toString(),
+                cellFramework: createTwoDimensionalArray(height, width, depth)
             });
         };
 
@@ -107,9 +115,46 @@ export class Volume {
             console.log('---- Type: ' + this.type + ' ---- Identity: ' + this.identity + ' ---- Details: ');
             console.table(this);
         };
-    }
-}
 
-Volume.prototype.info = function () {
+        this.getIdentity = function () {
+            const idObject = {
+                identity: this.identity,
+                type: this.type
+            };
 
+            return idObject;
+        };
+    };
 };
+
+// Volume.prototype.info = function () {
+
+// };
+
+function originEvaluator (cellOriginArray, isOrigin) {
+    if (typeof isOrigin == 'undefined') {
+        isOrigin = false
+    };
+
+    var hasOrigin = '';
+
+    if (cellOriginArray.length > 0 ) {
+        cellOriginArray.forEach((cellObject) => {
+            if (hasOrigin == false) {
+                if (cellObject.volumeOrigin == true) {
+                    hasOrigin = true;
+                } else {
+                    hasOrigin = false;
+                };
+            };
+        });
+    } else {
+        hasOrigin = false;
+    };
+
+    if (hasOrigin == false) {
+        isOrigin = true;
+    }
+
+    return isOrigin;
+}

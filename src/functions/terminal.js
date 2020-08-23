@@ -8,6 +8,7 @@ export function printLayers (volumeToPrint) {
         }
     } else if (volumeToPrint.type == 'World') {
         for (var strata in volumeToPrint.strata) {
+            var printArray = '';
             console.table(volumeToPrint.strata[strata].cellFramework);
         }
     } else {

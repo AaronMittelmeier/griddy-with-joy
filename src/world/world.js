@@ -10,6 +10,10 @@ export class World {
         this.volumes = [];
         this.type = 'World';
 
+        this.properties = [];
+        this.affectedBy = []; // things that change me
+        this.affectsOthers = []; // things that i change
+
         this.addStrata = function (strata) {
             this.strata.push({
                 strata: this.strata.length,
@@ -26,7 +30,8 @@ export class World {
 
             this.cells.push({
                 identity: cell.identity,
-                volumeIdentity: volumeIdentity,
+                volumes: cell.volumes,
+                type: cell.type,
                 coordinates: cell.coordinates
             });
 
@@ -35,7 +40,7 @@ export class World {
             cell.world = {
                 identity: this.identity,
                 name: this.name
-            }
+            };
         };
 
         this.disintegrateCell = function (cell) {
@@ -43,7 +48,7 @@ export class World {
             removeObjectFromObjectArray(cell, objectArray);
             this.strata[cell.coordinates.depth.index].cellFramework[cell.coordinates.height.index][cell.coordinates.width.index] = '';
             cell.world = {};
-        };
+        }; 
 
         this.integrateVolume = function (volume) {
             var cellArray = volume.cells;  
@@ -56,6 +61,11 @@ export class World {
             cellArray.forEach((cell) => {
                 this.integrateCell(cell, volume.identity);
             });
+
+            volume.world = {
+                identity: this.identity,
+                name: this.name
+            };
         };
 
         this.disintegrateVolume = function (volume) {
@@ -70,6 +80,22 @@ export class World {
             volume.world = '';
         };
 
+        this.addAffectedBy = function (affect) {
+            this.affectedBy.push({
+                identity: affect.identity,
+                type: affect.type,
+                propertiesAffected: affect.propertiesAffected
+            });
+        };
+
+        this.addAffectsOthers = function (affector) {
+            this.affectsOthers.push({
+                identity: affector.identity,
+                type: affector.type,
+                propertiesAffected: affector.propertiesAffected
+            });
+        };
+
         this.print = function () {
             console.log('\n');
             console.log('---- Type: ' + this.type + ' ---- Identity: ' + this.identity + ' ---- Details: ');
@@ -77,7 +103,12 @@ export class World {
         };
 
         this.getIdentity = function () {
-            return this.identity;
+            const idObject = {
+                identity: this.identity,
+                type: this.type
+            };
+
+            return idObject;
         };
     };
 };
