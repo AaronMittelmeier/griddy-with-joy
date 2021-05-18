@@ -59,7 +59,6 @@ export class Cell {
             })
         }
 
-
         this.addToVolume = function (volume, isOrigin) {
             if(typeof isOrigin == 'undefined') {isOrigin = false};
 
