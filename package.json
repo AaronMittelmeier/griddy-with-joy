@@ -29,7 +29,7 @@
   "dependencies": {
     "cucumber": "^6.0.5",
     "faker": "^4.1.0",
-    "gatsby": "^2.24.47",
+    "gatsby": "^4.25.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "uuid": "^8.3.0",
